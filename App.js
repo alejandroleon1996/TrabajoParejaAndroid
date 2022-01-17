@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Image, ScrollView, StyleSheet, SafeAreaView, FlatList, TextInput, Button } from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView, FlatList, Button, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -53,6 +53,15 @@ const styles = StyleSheet.create(
       fontWeight: 'bold',
       fontSize: 20,
       color: 'black',
+      marginHorizontal: 50
+    },
+    select: {
+      flex: 3,
+      textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: 20,
+      color: 'black',
+      borderWidth: 1,
     },
     input: {
       flex: 3,
@@ -66,34 +75,10 @@ const styles = StyleSheet.create(
       marginRight: 5,
       width: 80,
       height: 80,
-      }
+    }
   }
 )
 
-function ListadoStackScreen() {
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Listado" component={ListadoPantalla}
-        options={{
-          title: 'Busqueda',
-          headerStyle: {
-            backgroundColor: 'blue',
-          },
-          headerTintColor: 'white',
-          headerTitleAlign: 'center'
-        }} />
-      <HomeStack.Screen name="Detalles" component={DetalleUsuarioPantalla}
-        options={{
-          title: 'Frutas',
-          headerStyle: {
-            backgroundColor: 'blue',
-          },
-          headerTintColor: 'white',
-          headerTitleAlign: 'center'
-        }} />
-    </HomeStack.Navigator>
-  );
-}
 function InformacionPantalla() {
   const [fruits,setFruits]=useState(null);
 
@@ -106,6 +91,7 @@ function InformacionPantalla() {
       })
       .catch(error => console.log(error))
   }, []);
+
   function imagenFruta(item){
     if('kiwi'===item.name)
     return <Image style={styles.frutaLogo} source={ require('./src/image/kiwi.png')}/>
@@ -121,52 +107,53 @@ function InformacionPantalla() {
     return <Image style={styles.frutaLogo} source={ require('./src/image/platano.png')}/>
     else if ('uva'===item.name)
     return <Image style={styles.frutaLogo} source={ require('./src/image/uva.png')}/>
-    }
+  }
+
   const renderizarItem = ({ item }) => (
     
-      <View
-      style={{
-        flexDirection: 'row',
-        marginLeft: 10,
-        marginBottom: 10,
-        borderBottomColor: 'blue',
-        borderBottomWidth: 1,
-        borderBottomStartRadius: 3,
-        textAlign: "center",
-      }}>
-      {imagenFruta(item)}
-      <View>
-        <Text
-          style={{
-            fontFamily: 'Gill Sans Extrabold',
-            fontWeight: 'bold',
-            fontSize: 17,
-            marginLeft: 80,
-            textAlign: "center",
-            color:'black',
-          }}>
-          {item.name}
-        </Text>
-        <Text
-          style={{
-            textAlign: "center",
-            marginLeft: 80,
-            marginTop:20,
-            fontSize: 15,
-          }}>
-          Precio: 
-          <Text> </Text>
-        <Text
-          style={{
-            fontFamily: 'Comic',
-            color: 'red',
-          }}>
-            {item.price}€
-        </Text>
-        </Text>
-      </View>
+    <View
+    style={{
+      flexDirection: 'row',
+      marginLeft: 10,
+      marginBottom: 10,
+      borderBottomColor: 'blue',
+      borderBottomWidth: 1,
+      borderBottomStartRadius: 3,
+      textAlign: "center",
+    }}>
+    {imagenFruta(item)}
+    <View>
+      <Text
+        style={{
+          fontFamily: 'Gill Sans Extrabold',
+          fontWeight: 'bold',
+          fontSize: 17,
+          marginLeft: 80,
+          textAlign: "center",
+          color:'black',
+        }}>
+        {item.name}
+      </Text>
+      <Text
+        style={{
+          textAlign: "center",
+          marginLeft: 80,
+          marginTop:20,
+          fontSize: 15,
+        }}>
+        Precio: 
+        <Text> </Text>
+      <Text
+        style={{
+          fontFamily: 'Comic',
+          color: 'red',
+        }}>
+          {item.price}€
+      </Text>
+      </Text>
     </View>
-  );
+  </View>
+);
 
   return (
     <View>
@@ -180,49 +167,47 @@ function InformacionPantalla() {
   );
 }
 
-function DetalleUsuarioPantalla({ route }) {
+function ListadoPantalla() {
 
-  const [fruits,setFruits]=useState(null);
+  const [fruit,setFruit]=useState(null);
+  const [price,setPrice]=useState(null);
 
-    useEffect(() => {
-      fetch("http://10.0.2.2:8080/fruits")
-        .then(response => response.json())
-        .then((responseJson) => {
-          console.log('getting data from fectch', responseJson);
-          setFruits(responseJson)
-        })
-        .catch(error => console.log(error))
-    }, []);
-
-    const renderizarItem = ({ item }) => (
-      <View>
-        
-        <Text style={styles.letraGordita}>Nombre: {item.name}       Precio: {item.price}</Text>
-      </View>
-    );
-
-    return (
-      <FlatList
-        data={fruits}
-        renderItem={renderizarItem}
-        keyExtractor={item=>item.id}
-      />
-    );
-}
-
-function ListadoPantalla({ navigation }) {
-
-  const [edad, setEdad] = useState();
+  const onPress = () => {
+    fetch('http://10.0.2.2:8080/fruits', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "name": fruit,
+        "price": price
+      }),
+    })
+    .then((responseJson) => {
+      console.log('getting data from fectch', responseJson);
+      Alert.alert("Fruta añadida correctamente");
+      setFruit(null);
+      setPrice(null);
+    })
+      .catch(error => console.log(error));
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.informacion}> Agrea una fruta nueva </Text>
+      <Text style={styles.informacion}> Agrega una fruta nueva </Text>
       <View style={styles.busqueda}>
         <Text style={styles.frutas}> Frutas </Text>
-        <ModalDropdown style={styles.input} textStyle={styles.opciones} options={['option 1', 'option 2']}/>
+        <ModalDropdown style={styles.select} textStyle={styles.opciones}
+          options={['Piña', 'Manzana','Melocotón', 'Uvas','Naranja','Kiwi','Plátano','Pera']}
+          onSelect={(fruit) => setFruit(fruit)}/>
       </View>
+      <View style={styles.busqueda}>
+        <Text style={styles.frutas}> Precio </Text>
+        <TextInput style={styles.input} onChangeText={price => setPrice(price)} />
+      </View> 
       
-      <Button title='Añadir' style={styles.informacion} onPress={() => navigation.navigate('Detalles')} />
+      <Button title='Añadir' style={styles.informacion} onPress={onPress} />
 
     </SafeAreaView>
   );
@@ -261,7 +246,16 @@ function App() {
             headerTintColor: 'white',
             headerTitleAlign: 'center'
           }} />
-        <Tab.Screen options={{ headerShown: false }} name="Listado" component={ListadoStackScreen} />
+        <Tab.Screen options={{ headerShown: false }} name="Listado" component={ListadoPantalla} 
+          options={{
+          title: 'Busqueda',
+          headerStyle: {
+            backgroundColor: 'blue',
+          },
+          headerTintColor: 'white',
+          headerTitleAlign: 'center'
+        }}
+        />
 
       </Tab.Navigator>
     </NavigationContainer>
