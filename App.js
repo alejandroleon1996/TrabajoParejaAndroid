@@ -61,7 +61,12 @@ const styles = StyleSheet.create(
       fontSize: 20,
       color: 'black',
       borderWidth: 1,
-    }
+    },
+    frutaLogo: {
+      marginRight: 5,
+      width: 80,
+      height: 80,
+      }
   }
 )
 
@@ -89,7 +94,6 @@ function ListadoStackScreen() {
     </HomeStack.Navigator>
   );
 }
-
 function InformacionPantalla() {
   const [fruits,setFruits]=useState(null);
 
@@ -102,19 +106,77 @@ function InformacionPantalla() {
       })
       .catch(error => console.log(error))
   }, []);
-
+  function imagenFruta(item){
+    if('kiwi'===item.name)
+    return <Image style={styles.frutaLogo} source={ require('./src/image/kiwi.png')}/>
+    else if ('manzana'===item.name)
+    return <Image style={styles.frutaLogo} source={ require('./src/image/manzana.png')}/>
+    else if ('melocoton'===item.name)
+    return <Image style={styles.frutaLogo} source={ require('./src/image/melocoton.png')}/>
+    else if ('naranja'===item.name)
+    return <Image style={styles.frutaLogo} source={ require('./src/image/naranja.png')}/>
+    else if ('piña'===item.name)
+    return <Image style={styles.frutaLogo} source={ require('./src/image/piña.png')}/>
+    else if ('platano'===item.name)
+    return <Image style={styles.frutaLogo} source={ require('./src/image/platano.png')}/>
+    else if ('uva'===item.name)
+    return <Image style={styles.frutaLogo} source={ require('./src/image/uva.png')}/>
+    }
   const renderizarItem = ({ item }) => (
-    <View>
-      <Text style={styles.letraGordita}>Nombre: {item.name}       Precio: {item.price}</Text>
+    
+      <View
+      style={{
+        flexDirection: 'row',
+        marginLeft: 10,
+        marginBottom: 10,
+        borderBottomColor: 'blue',
+        borderBottomWidth: 1,
+        borderBottomStartRadius: 3,
+        textAlign: "center",
+      }}>
+      {imagenFruta(item)}
+      <View>
+        <Text
+          style={{
+            fontFamily: 'Gill Sans Extrabold',
+            fontWeight: 'bold',
+            fontSize: 17,
+            marginLeft: 80,
+            textAlign: "center",
+            color:'black',
+          }}>
+          {item.name}
+        </Text>
+        <Text
+          style={{
+            textAlign: "center",
+            marginLeft: 80,
+            marginTop:20,
+            fontSize: 15,
+          }}>
+          Precio: 
+          <Text> </Text>
+        <Text
+          style={{
+            fontFamily: 'Comic',
+            color: 'red',
+          }}>
+            {item.price}€
+        </Text>
+        </Text>
+      </View>
     </View>
   );
 
   return (
+    <View>
+    <Text> </Text>
     <FlatList
       data={fruits}
       renderItem={renderizarItem}
       keyExtractor={item=>item.id}
     />
+    </View>
   );
 }
 
