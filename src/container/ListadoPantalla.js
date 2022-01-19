@@ -42,7 +42,7 @@ function ListadoPantalla() {
         </View>
         <View style={styles.busqueda}>
           <Text style={styles.frutas}> Precio </Text>
-          <TextInput style={styles.input} onChangeText={price => setPrice(price)} />
+          <TextInput style={styles.input} onChangeText={price => setPrice(price)} keyboardType="numeric" />
         </View>  
         <View style={styles.boton}>
         <TouchableOpacity title='Añadir' onPress={onPress}>

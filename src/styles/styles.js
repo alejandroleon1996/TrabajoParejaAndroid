@@ -7,6 +7,9 @@ const styles = StyleSheet.create(
         width: '100%',
         height: '100%'
     },
+    container2:{
+        backgroundColor:'#D3F9FB',
+    },
     informacion: {
         textAlign: 'center',
         padding: 30,
@@ -65,7 +68,6 @@ const styles = StyleSheet.create(
     modal:{
         padding: 20,
         width: 197,
-        
     },
     input: {
         flex: 3,

@@ -74,6 +74,7 @@ function InformacionPantalla() {
     }
     else{
       return (
+        <View>
         <ScrollView 
           refreshControl={
           <RefreshControl 
@@ -88,6 +89,7 @@ function InformacionPantalla() {
             keyExtractor={item=>item.id}
           />
         </ScrollView> 
+        </View>
       );
     }
 }

@@ -13,6 +13,10 @@ function App() {
     <NavigationContainer>
 
       <Tab.Navigator
+        tabBarOptions={{
+          activeBackgroundColor: '#97E0BC',
+          inactiveBackgroundColor: '#B1EACE',
+        }}
         screenOptions={({ route }) => ({ 
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -24,7 +28,6 @@ function App() {
             return <Ionicons name={iconName} size={size} color={color} />;
           },
           tabBarStyle:{
-            backgroundColor: '#97E0BC',
           },
           tabBarActiveTintColor: 'black',
           tabBarInactiveTintColor: 'grey',
