@@ -52,7 +52,6 @@ function InformacionPantalla() {
     }
   
     const renderizarItem = ({ item }) => ( 
-      
       <View style={styles.view}>
       {imagenFruta(item)}
         <View>

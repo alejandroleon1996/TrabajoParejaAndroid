@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, Alert, SafeAreaView, Button, TextInput } from 'react-native';
+import { Text, View, Alert, SafeAreaView, Button, TextInput, TouchableOpacity } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import styles from '../styles/styles';
 import InformacionPantalla from './InformacionPantalla';
@@ -32,11 +32,11 @@ function ListadoPantalla() {
     }
   
     return (
-      <SafeAreaView style={styles.container}>
+      <View  style={styles.container}>
         <Text style={styles.informacion}> Agrega una fruta nueva </Text>
         <View style={styles.busqueda}>
           <Text style={styles.frutas}> Frutas </Text>
-          <ModalDropdown style={styles.select} textStyle={styles.opciones}
+          <ModalDropdown style={styles.select} textStyle={styles.opciones} dropdownStyle={styles.modal}
             options={['Piña', 'Manzana','Melocoton', 'Uvas','Naranja','Kiwi','Platano','Pera']}
             onSelect={(id, fruit) => setFruit(fruit)}/>
         </View>
@@ -44,10 +44,12 @@ function ListadoPantalla() {
           <Text style={styles.frutas}> Precio </Text>
           <TextInput style={styles.input} onChangeText={price => setPrice(price)} />
         </View>  
-        
-        <Button title='Añadir' style={styles.informacion} onPress={onPress} />
-  
-      </SafeAreaView>
+        <View style={styles.boton}>
+        <TouchableOpacity title='Añadir' onPress={onPress}>
+        <Text style={styles.botonText}> Añadir </Text>
+        </TouchableOpacity>
+        </View>
+      </View>
     );
 }
 
