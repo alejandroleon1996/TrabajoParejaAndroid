@@ -1,5 +1,5 @@
 {
-  "name": "myfirstproject",
+  "name": "hola",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,11 +10,12 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@react-navigation/bottom-tabs": "^6.0.9",
+    "@react-navigation/bottom-tabs": "6.0.9",
     "@react-navigation/native": "6.0.6",
     "@react-navigation/native-stack": "6.2.5",
     "react": "17.0.2",
     "react-native": "0.66.3",
+    "react-native-modal-dropdown": "1.0.2",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "3.9.0",
     "react-native-vector-icons": "9.0.0"
