@@ -75,21 +75,20 @@ function InformacionPantalla() {
     else{
       return (
         <View>
-        <ScrollView 
-          refreshControl={
-          <RefreshControl 
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        }>
           <Text> </Text>
           <FlatList
             data={fruits}
             renderItem={renderizarItem}
             keyExtractor={item=>item.id}
+            refreshControl={
+              <RefreshControl 
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+              />
+            }
           />
-        </ScrollView> 
-        </View>
+        </View> 
+        
       );
     }
 }
