@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Text, View, Alert, SafeAreaView, Button, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, Alert, TextInput, TouchableOpacity } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import styles from '../styles/styles';
-import InformacionPantalla from './InformacionPantalla';
 
 function ListadoPantalla() {
 
@@ -37,7 +36,7 @@ function ListadoPantalla() {
         <View style={styles.busqueda}>
           <Text style={styles.frutas}> Frutas </Text>
           <ModalDropdown style={styles.select} textStyle={styles.opciones} dropdownStyle={styles.modal}
-            options={['Piña', 'Manzana','Melocoton', 'Uvas','Naranja','Kiwi','Platano','Pera']}
+            options={['Pina', 'Manzana','Melocoton', 'Uvas','Naranja','Kiwi','Platano','Pera']}
             onSelect={(id, fruit) => setFruit(fruit)}/>
         </View>
         <View style={styles.busqueda}>

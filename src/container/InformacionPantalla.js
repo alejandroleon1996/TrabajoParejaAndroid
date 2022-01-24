@@ -43,8 +43,8 @@ function InformacionPantalla() {
       return <Image style={styles.frutaLogo} source={ require('../imagenes/melocoton.png')}/>
       else if ('Naranja'===item.name)
       return <Image style={styles.frutaLogo} source={ require('../imagenes/naranja.png')}/>
-      else if ('Piña'===item.name)
-      return <Image style={styles.frutaLogo} source={ require('../imagenes/piña.png')}/>
+      else if ('Pina'===item.name)
+      return <Image style={styles.frutaLogo} source={ require('../imagenes/pina.png')}/>
       else if ('Platano'===item.name)
       return <Image style={styles.frutaLogo} source={ require('../imagenes/platano.png')}/>
       else if ('Uvas'===item.name)
